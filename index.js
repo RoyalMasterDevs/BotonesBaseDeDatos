@@ -50,7 +50,7 @@ app.get("/insertnuevoenpost", (req, res) => {
         res.send("Me arme un nuevo registro");
     });
 })
-//Insertar un registro en la tabla post
+//Insertar un registro 2 en la tabla post
 app.get("/insertnuevoenpost2", (req, res) => {
     let post = { title: "test2", body: "secuencia 2" };
     let sql = "INSERT INTO posts SET ?";
@@ -67,11 +67,40 @@ app.get("/traetetodoslosposts", (req, res) => {
     let query = db.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
-        res.send("Me traje todo");
-        // res.send(query);
-    })
-})
+        res.send("Me traje todos los posts");
+    });
+});
 
+//SELECCIONA 1 POST
+app.get("/traete1Post/:id", (req, res) => {
+    let sql = `SELECT * FROM nodemysql.posts WHERE id= ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send("Me traje 1 Post");
+    });
+});
+
+//ACTUALIZA POST
+app.get("/cambiaEstePost/:id", (req, res) => {
+    let newTitle = "Cambio de titulo desde NODEJS";
+    let sql = `UPDATE posts SET title= '${newTitle}' WHERE id=${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send("Cambie este Post");
+    });
+});
+
+//BORRA POST
+app.get("/borraEstePost/:id", (req, res) => {
+    let sql = `DELETE FROM posts WHERE id=${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("result");
+        res.send("POST BORRADO");
+    });
+});
 //Routing
 app.use('/', usuarioRoutes);
 
