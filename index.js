@@ -25,7 +25,7 @@ app.get("/armateunadb", (req, res) => {
     let sql = "CREATE DATABASE nodemysql";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        console.log("result");
+        console.log(result);
         res.send("Me arme la base de datos");
     });
 })
@@ -35,7 +35,7 @@ app.get("/armateuntable", (req, res) => {
     let sql = "CREATE TABLE posts (id int AUTO_INCREMENT, title VARCHAR(255), body VARCHAR(255), PRIMARY KEY (id))";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        console.log("result");
+        console.log(result);
         res.send("Me arme una table llamada posts");
     });
 })
@@ -46,7 +46,7 @@ app.get("/insertnuevoenpost", (req, res) => {
     let sql = "INSERT INTO posts SET ?";
     let query = db.query(sql, post, (err, result) => {
         if (err) throw err;
-        console.log("result");
+        console.log(result);
         res.send("Me arme un nuevo registro");
     });
 })
@@ -56,7 +56,7 @@ app.get("/insertnuevoenpost2", (req, res) => {
     let sql = "INSERT INTO posts SET ?";
     let query = db.query(sql, post, (err, result) => {
         if (err) throw err;
-        console.log("result");
+        console.log(result);
         res.send("Otro registro mas a la tabla");
     });
 })
@@ -97,7 +97,7 @@ app.get("/borraEstePost/:id", (req, res) => {
     let sql = `DELETE FROM posts WHERE id=${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if (err) throw err;
-        console.log("result");
+        console.log(result);
         res.send("POST BORRADO");
     });
 });
